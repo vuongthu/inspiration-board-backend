@@ -35,5 +35,11 @@ def create_app(test_config=None):
     # from .routes import example_bp
     # app.register_blueprint(example_bp)
 
+    from .board_routes import bp as board_bp
+    from .card_routes import bp as card_bp
+
+    app.register_blueprint(board_bp)
+    app.register_blueprint(card_bp)
+
     CORS(app)
     return app
