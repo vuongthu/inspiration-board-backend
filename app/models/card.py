@@ -15,9 +15,10 @@ class Card(db.Model):
         )
 
     @classmethod
-    def from_dict(cls, data_dict):
+    def from_dict(cls, data_dict, **kwargs):
         return cls(
-            message=data_dict["message"]
+            message=data_dict["message"],
+            board_id=kwargs["board_id"]
         )
 
     def increase_likes(self):

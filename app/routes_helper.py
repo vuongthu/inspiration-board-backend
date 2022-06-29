@@ -6,7 +6,7 @@ def error_msg(message, status_code):
 def success_msg(message, status_code):
     return make_response(jsonify(dict(details=message)), status_code)
 
-def make_model(cls, data_dict):
+def make_model(cls, data_dict, **kwargs):
     try: 
         model = cls.from_dict(data_dict)
     except KeyError: 
