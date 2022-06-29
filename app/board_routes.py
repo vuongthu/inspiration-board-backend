@@ -7,17 +7,11 @@ from .routes_helper import error_msg, success_msg, make_model, get_model_by_id
 bp = Blueprint("boards_bp", __name__, url_prefix="/boards")
 
 #POST/boards
-@bp.route("", methods = ["POST"])
+@bp.route("", methods=["POST"])
 def create_board():
     request_body = request.get_json()
-    if ("title" not in request_body or 
-        "owner" not in request_body):
 
-        return jsonify({"details": "Invalid data"}),
-
-    new_board = Board(
-        title=request_body["title"],
-        owner=request_body["owner"],)
+    new_board = make_model(Board, request_body)
 
     db.session.add(new_board)
     db.session.commit()
@@ -28,22 +22,13 @@ def create_board():
 #GET/boards
 @bp.route("", methods=("GET",))
 def get_all_boards():
-    title_param = request.args.get("title")
-    sort_param = request.args.get("sort")
 
-    if title_param:
-        boards = Board.query.filter_by(title=title_param)
-    else:
-        boards = Board.query.all()
+    boards = Board.query.order_by("board_id").all()
     
-    result_list = [board.to_dict() for board in boards]
-    if sort_param == "asc":
-        result_list.sort(key = lambda board: board.get("title").lower())
-    
-    if sort_param == "desc":
-        result_list.sort(reverse = True, key = lambda task : task.get("title").lower())
+    board_list = [board.to_dict() for board in boards]
 
-    return jsonify(result_list), 200
+    return jsonify(board_list), 200
+
 
 @bp.route("/<board_id>/cards", methods=["POST"])
 def create_card(board_id):
