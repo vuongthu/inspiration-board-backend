@@ -22,4 +22,5 @@ class Card(db.Model):
         )
 
     def increase_likes(self):
+        self.likes_count = self.likes_count if self.likes_count else 0
         self.likes_count += 1
