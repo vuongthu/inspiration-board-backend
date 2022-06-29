@@ -13,6 +13,12 @@ class Card(db.Model):
             message=self.message,
             likes_count=self.likes_count if self.likes_count else 0
         )
-    
+
+    @classmethod
+    def from_dict(cls, data_dict):
+        return cls(
+            message=data_dict["message"]
+        )
+
     def increase_likes(self):
         self.likes_count += 1

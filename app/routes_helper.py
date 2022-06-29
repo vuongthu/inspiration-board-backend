@@ -24,4 +24,4 @@ def get_model_by_id(cls, id):
     if model:
         return model
     
-    error_msg(f"No {cls.__name__} data with id: {id}", 400)
+    error_msg(f"No {cls.__name__} data with id: {id}", 404)
