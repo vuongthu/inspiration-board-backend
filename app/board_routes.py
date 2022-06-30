@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Blueprint, request, jsonify, make_response
 from app import db
 from app.models.board import Board
@@ -40,3 +41,11 @@ def create_card(board_id):
     db.session.commit()
 
     return jsonify({"card": new_card.to_dict()}), 201
+
+# DELETE/boards
+@bp.route("<board_id>", methods=["DELETE"])
+def delete_board (board_id):
+    board = Board.query(board_id)
+    db.session.delete(board)
+    db.session.commit()
+    return make_response(jsonify({"details": 'Board(s) successfully deleted'} ), 200)
