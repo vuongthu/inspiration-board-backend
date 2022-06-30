@@ -1,4 +1,4 @@
-from crypt import methods
+
 from flask import Blueprint, request, jsonify, make_response
 from app import db
 from app.models.board import Board
@@ -20,10 +20,12 @@ def get_all_boards():
 
 
 #GET/ board by id   
-@bp.route("<board_id>", methods=["GET"])
-def get_one_board(board_id):
-    task = Board.query(board_id) 
-    return jsonify({"task": task.to_json()}), 200
+@bp.route("/<board_id>/cards", methods=["GET"])
+def get_all_cards(board_id):
+    board = get_model_by_id(Board, board_id)
+    cards = board.cards 
+    card_list =  [cards.to_dict() for card in cards]
+    return jsonify(board_list), 200
 
 
 #POST/boards
