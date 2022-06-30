@@ -31,14 +31,13 @@ def create_card(card_id):
 #PATCH/card
 @bp.route("/<card_id>/like", methods=["PATCH"])
 def update_like_card(card_id):
-
     card = get_model_by_id(Card, card_id)
     card.increase_likes()
     db.session.commit()
     return jsonify({"card": card.to_dict()}), 200
 
 
-    # DELETE/card
+    # DELETE/card by id
 @bp.route("<card_id>", methods=["DELETE"])
 def delete_board (card_id):
     board = Board.query(card_id)
