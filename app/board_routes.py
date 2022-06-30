@@ -33,6 +33,7 @@ def create_board():
     db.session.commit()
     return jsonify({"board": new_board.to_dict()}), 201
 
+
 #POST/board by id
 @bp.route("/<board_id>/cards", methods=["POST"])
 def create_card(board_id):
