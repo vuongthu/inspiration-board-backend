@@ -6,6 +6,18 @@ from .routes_helper import success_msg, make_model, get_model_by_id
 
 bp = Blueprint("cards_bp", __name__, url_prefix="/cards")
 
+
+####  ROUTES  ####
+
+
+#GET/cards
+@bp.route("", methods=("GET",))
+def get_all_boards():
+    cards = Card.query.order_by("card_id").all()
+    card_list = [card.to_dict() for card in cards]
+    return jsonify(card_list), 200
+
+
 #GET/card by id
 @bp.route("/<card_id>/cards", methods=["POST"])
 def create_card(card_id):

@@ -8,6 +8,9 @@ from .routes_helper import error_msg, success_msg, make_model, get_model_by_id
 bp = Blueprint("boards_bp", __name__, url_prefix="/boards")
 
 
+####  ROUTES  ####
+
+
 #GET/boards
 @bp.route("", methods=("GET",))
 def get_all_boards():
