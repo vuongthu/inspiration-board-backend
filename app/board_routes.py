@@ -30,28 +30,19 @@ def get_all_boards():
 
     return jsonify(board_list), 200
 
-    #def get_all_task():
-    # sort_query = request.args.get("sort")
-    # if sort_query == "asc":
-    #     tasks = Task.query.order_by(Task.title.asc())
-    # elif sort_query == "desc":
-    #     tasks = Task.query.order_by(Task.title.desc())
-    # else:
-    #     tasks = Task.query.all()
-    # tasks_response = []
-    # for task in tasks:
-    #     tasks_response.append(task.to_json())
+#GET/ board by id   
+@bp.route("<board_id>", methods=["GET"])
+def get_one_board(board_id):
+    task = Board.query(board_id) 
+    return jsonify({"task": task.to_json()}), 200
 
 
 @bp.route("/<board_id>/cards", methods=["POST"])
 def create_card(board_id):
     request_body = request.get_json()
-
     new_card = make_model(Card, request_body, board_id=board_id)
-
     db.session.add(new_card)
     db.session.commit()
-
     return jsonify({"card": new_card.to_dict()}), 201
 
 
