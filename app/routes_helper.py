@@ -11,7 +11,7 @@ def make_model(cls, data_dict, **kwargs):
         model = cls.from_dict(data_dict, **kwargs)
     except KeyError as err:
         print(err)
-        error_msg("invalid data", 400)
+        error_msg("Invalid data", 400)
 
     return model
 
