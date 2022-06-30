@@ -34,7 +34,7 @@ def create_board():
     return jsonify({"board": new_board.to_dict()}), 201
 
 
-#POST/board by id
+#POST/card by board_id
 @bp.route("/<board_id>/cards", methods=["POST"])
 def create_card(board_id):
     request_body = request.get_json()
@@ -50,4 +50,4 @@ def delete_board(board_id):
     board = get_model_by_id(Board, board_id)
     db.session.delete(board)
     db.session.commit()
-    return success_msg(f"Board {board.board_id} successfully deleted",200)
+    return success_msg(f"Board #{board.board_id} successfully deleted",200)

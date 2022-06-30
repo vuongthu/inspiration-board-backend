@@ -22,4 +22,4 @@ def delete_card(card_id):
     card = get_model_by_id(Card, card_id)
     db.session.delete(card)
     db.session.commit()
-    return success_msg(f"Card {card.card_id} successfully deleted",200) 
+    return success_msg(f"Card #{card.card_id} successfully deleted",200) 
