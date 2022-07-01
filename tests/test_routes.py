@@ -12,6 +12,19 @@ def test_get_no_saved_boards(client):
     assert response.status_code == 200
     assert response_body == []
 
+
+
+#GET/boards
+def test_get_boards(client, one_board):
+    response = client.get("/boards")
+    response_body = response.get_json()
+
+    assert response.status_code == 200
+    assert response_body == [{
+            "id" : 1,
+            "title": "Motivational Quotes",
+            "owner": "Nostalgia"
+    }]
 #DELETE /boards/1
 def test_delete_board(client, one_board):
     response = client.delete("/boards/1")
