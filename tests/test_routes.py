@@ -1,7 +1,16 @@
+from urllib import response
 import pytest
 from app.models.board import Board
 from app.models.card import Card
 
+
+#GET/boards
+def test_get_no_saved_boards(client):
+    response = client.get("/boards")
+    response_body = response.get_json()
+
+    assert response.status_code == 200
+    assert response_body == []
 
 #DELETE /boards/1
 def test_delete_board(client, one_board):
