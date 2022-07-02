@@ -37,12 +37,28 @@ def test_get_cards_no_saved_cards(client, one_board):
 
 
 #GET/boards/1/cards
-def test_get_cards_by_board_id(client, one_board):
+def test_get_cards_by_board_id(client, one_card):
     response = client.get("/boards/1/cards")
     response_body = response.get_json()
 
     assert response.status_code == 200
+    assert  response_body == [{
+            "id" : 1,
+            "likes_count" : 0,
+            "message": "Motivation is what gets you started. Habit is what keeps you going"
+    }]
 
+
+#GET/boards/1/cards
+def test_get_cards_when_no_board_id(client, one_card):
+    pass
+
+
+
+
+#GET/boards/1/cards
+def get_cards_when_no_board_id():
+    pass
 
 #DELETE /boards/1
 def test_delete_board(client, one_board):
