@@ -50,15 +50,15 @@ def test_get_cards_by_board_id(client, one_card):
 
 
 #GET/boards/1/cards
-def test_get_cards_when_no_board_id(client, one_card):
-    pass
+def test_get_cards_when_no_board_id(client):
+    response = client.get("/boards/1/cards")
+    response_body = response.get_json()
 
+    assert response.status_code == 404
+    assert response_body == {
+    "details" : "No Board data with id: 1"   
+    }
 
-
-
-#GET/boards/1/cards
-def get_cards_when_no_board_id():
-    pass
 
 #DELETE /boards/1
 def test_delete_board(client, one_board):
