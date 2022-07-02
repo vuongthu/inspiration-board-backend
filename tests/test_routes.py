@@ -25,6 +25,25 @@ def test_get_boards(client, one_board):
             "title": "Motivational Quotes",
             "owner": "Nostalgia"
     }]
+
+
+#GET/boards/1/cards
+def test_get_cards_no_saved_cards(client, one_board):
+    response = client.get("/boards/1/cards")
+    response_body = response.get_json()
+
+    assert response.status_code == 200
+    assert response_body == []
+
+
+#GET/boards/1/cards
+def test_get_cards_by_board_id(client, one_board):
+    response = client.get("/boards/1/cards")
+    response_body = response.get_json()
+
+    assert response.status_code == 200
+
+
 #DELETE /boards/1
 def test_delete_board(client, one_board):
     response = client.delete("/boards/1")
