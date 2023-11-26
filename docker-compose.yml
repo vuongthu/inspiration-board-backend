@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  backend:
+    image: ibb
+    ports:
+      - "8000:8000"
+    environment:
+      - SQLALCHEMY_DATABASE_URI=${SQLALCHEMY_DATABASE_URI}
+    networks:
+      - postgres-db_default
+
+networks:
+  postgres-db_default:
+    external: true
